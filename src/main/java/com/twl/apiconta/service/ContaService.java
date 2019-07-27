@@ -20,5 +20,30 @@ public interface ContaService {
      * @param page Número da paginação
      * @return Lista de {@link com.twl.apiconta.model.Conta}
      */
-    List<Conta> findAllContas(Integer size, Integer page);
+    List<Conta> findAll(Integer size, Integer page);
+
+    /**
+     * Busca uma conta por seu identificador.
+     *
+     * @param id {@link com.twl.apiconta.model.Conta#getId()}
+     * @return {@link com.twl.apiconta.model.Conta} correspondente ao ID informado
+     */
+    Conta findById(String id);
+
+    /**
+     * Salva uma nova {@link com.twl.apiconta.model.Conta} na base de dados.
+     *
+     * @param conta nova {@link com.twl.apiconta.model.Conta} a ser salva
+     * @return nova {@link com.twl.apiconta.model.Conta} salva
+     */
+    Conta save(Conta conta);
+
+    /**
+     * Atualiza a {@link com.twl.apiconta.model.Conta} do ID informado.
+     *
+     * @param id {@link com.twl.apiconta.model.Conta#getId()}
+     * @param conta {@link com.twl.apiconta.model.Conta} a ser atualizada
+     * @return {@link com.twl.apiconta.model.Conta} atualizada
+     */
+    Conta update(String id, Conta conta);
 }
