@@ -49,13 +49,13 @@ public class ContaController {
     @GetMapping
     public ResponseEntity<List<Conta>> getAllContas(
             @RequestParam(name = "size", required = false) Integer size,
-            @RequestParam(name = "page", required = false)Integer page) {
+            @RequestParam(name = "page", required = false) Integer page) {
 
         List<Conta> contas = contaService.findAll(size, page);
 
         return CollectionUtils.isEmpty(contas)
-                ? ResponseEntity.status(HttpStatus.NO_CONTENT).body(null)
-                : ResponseEntity.status(HttpStatus.OK).body(contas);
+                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(contas, HttpStatus.OK);
     }
 
     /**
@@ -70,8 +70,8 @@ public class ContaController {
         Conta conta = contaService.findById(id);
 
         return Objects.isNull(conta)
-                ? ResponseEntity.status(HttpStatus.NO_CONTENT).body(null)
-                : ResponseEntity.status(HttpStatus.OK).body(conta);
+                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(conta, HttpStatus.OK);
     }
 
     /**
@@ -85,11 +85,11 @@ public class ContaController {
     public ResponseEntity<?> saveConta(@RequestBody Conta conta) {
 
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(contaService.save(conta));
+            return new ResponseEntity<>(contaService.save(conta), HttpStatus.OK);
         } catch (ConstraintViolationException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -105,13 +105,13 @@ public class ContaController {
             @RequestBody Conta conta) {
 
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(contaService.update(id, conta));
+            return new ResponseEntity<>(contaService.update(id, conta), HttpStatus.OK);
         } catch (ConstraintViolationException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.METHOD_NOT_ALLOWED);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -125,6 +125,6 @@ public class ContaController {
     public ResponseEntity<?> deleteConta(@PathVariable String id) {
 
         contaService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
