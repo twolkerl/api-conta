@@ -70,4 +70,18 @@ public class ContaServiceImpl implements ContaService {
             throw new NoSuchElementException("Não existe conta para o ID informado!");
         }
     }
+
+    @Override
+    public void delete(String id) {
+
+        Conta conta = contaRepository.findById(id).orElse(null);
+
+        if (Objects.nonNull(conta)) {
+
+            conta.setStatus(false);
+            conta.setDataAtualizacao(LocalDate.now());
+
+            contaRepository.save(conta);
+        }
+    }
 }

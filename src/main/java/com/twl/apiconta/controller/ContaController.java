@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -118,10 +119,12 @@ public class ContaController {
      * DELETE /conta/{id}
      * <br/>Faz o delete lógico da conta (status = false)
      *
-     * @return TODO
+     * @return {@link org.springframework.http.ResponseEntity} com o status da operação
      */
-    public ResponseEntity<?> deleteConta() {
-        //TODO implementar...
-        return null;
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteConta(@PathVariable String id) {
+
+        contaService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

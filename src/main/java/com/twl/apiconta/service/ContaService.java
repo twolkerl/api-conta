@@ -46,4 +46,11 @@ public interface ContaService {
      * @return {@link com.twl.apiconta.model.Conta} atualizada
      */
     Conta update(String id, Conta conta);
+
+    /**
+     * Realiza a exclusão lógica da {@link com.twl.apiconta.model.Conta} correspondente ao ID informado.
+     *
+     * @param id {@link com.twl.apiconta.model.Conta#getId()}
+     */
+    void delete(String id);
 }
