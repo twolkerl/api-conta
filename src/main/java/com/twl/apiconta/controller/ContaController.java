@@ -121,7 +121,7 @@ public class ContaController {
      *
      * @return {@link org.springframework.http.ResponseEntity} com o status da operação
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteConta(@PathVariable String id) {
 
         contaService.delete(id);
