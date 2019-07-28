@@ -50,7 +50,6 @@ public interface ContaService {
     /**
      * Realiza a exclusão lógica da {@link com.twl.apiconta.model.Conta} correspondente ao ID informado.
      *
-     * @param id Identificador de {@link com.twl.apiconta.model.Conta}
      * @param id {@link com.twl.apiconta.model.Conta#getId()}
      */
     void delete(String id);
