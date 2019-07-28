@@ -62,6 +62,7 @@ public class ContaController {
      * GET /conta/{id}
      * <br/>Retorna uma conta especifica pelo ID
      *
+     * @param id Identificador da {@link com.twl.apiconta.model.Conta}
      * @return uma {@link com.twl.apiconta.model.Conta} correspondente ao id informado
      */
     @GetMapping("/{id}")
@@ -97,6 +98,8 @@ public class ContaController {
      * PUT /conta/{id}
      * <br/>Atualiza um conta
      *
+     * @param id Identificador de {@link com.twl.apiconta.model.Conta}
+     * @param conta Dados da {@link com.twl.apiconta.model.Conta} para atualização
      * @return registro de {@link com.twl.apiconta.model.Conta} atualizada
      */
     @PutMapping(value = "/{id}", consumes = APPLICATION_JSON)
@@ -119,6 +122,7 @@ public class ContaController {
      * DELETE /conta/{id}
      * <br/>Faz o delete lógico da conta (status = false)
      *
+     * @param id Identificador de {@link com.twl.apiconta.model.Conta}
      * @return {@link org.springframework.http.ResponseEntity} com o status da operação
      */
     @DeleteMapping("/{id}")
